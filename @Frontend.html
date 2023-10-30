@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients</title>
+</head>
+<body>
+    <h1>Patients' Prescriptions</h1>
+    <ul id="patients-list"></ul>
+
+    <script>
+        async function fetchPatients() {
+            let response = await fetch("http://localhost:8080/api/patients");
+            let data = await response.json();
+            let list = document.getElementById("patients-list");
+
+            data.forEach(patient => {
+                let listItem = document.createElement("li");
+                listItem.textContent = `${patient.name} - ${patient.prescription}`;
+                list.appendChild(listItem);
+            });
+        }
+
+        fetchPatients();
+    </script>
+</body>
+</html>
